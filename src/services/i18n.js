@@ -1,0 +1,78 @@
+import i18n from 'i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import { initReactI18next } from 'react-i18next';
+
+i18n
+    .use(initReactI18next)
+    .use(LanguageDetector)
+    .init({
+    fallbackLng: "en",
+    resources: {
+        es: {
+            translation: {
+                new: "Nuevo",
+                open: "Abrir",
+                getColor: "Obtener Color",
+                registerColor: "Registrar Color",
+                history: "Historial",
+                zoomout: "Reducir",
+                zoomin: "Ampliar",
+                settings: "Configuración",
+                controlpanel: "Panel de Control",
+                english: "English (Inglés)",
+                spanish: "Español",
+                colortoWhite: "Color a Blanco",
+                colortoBlack: "Color a Negro",
+                colortoRed: "Color a Rojo",
+                colortoGreen: "Color a Verde",
+                colortoBlue: "Color a Azul",
+                language: "Idioma",
+                deleteHistory: "Borrar el historial de colores",
+                deleteData: "Borrar datos",
+                historyDelete: "Historial Borrado",
+                colorCopied: "Color Copiado",
+                generateColor: "Generar Color",
+                version: "Versión",
+                cPallete: "Paleta de Colores",
+                gPallete: "Generar Colores",
+                copyPallete: "Copiar Colores",
+                copiedColors: "Colores Copiados",
+                wColorHex: "Escribe tu color Hexadecimal",
+                searchColor: "Buscar Color",
+            },
+        },
+        en: {
+            translation: {
+                new: "New",
+                open: "Open",
+                getColor: "Get Color",
+                registerColor: "Register Color",
+                history: "History",
+                zoomout: "Zoom Out",
+                zoomin: "Zoom In",
+                settings: "Settings",
+                controlpanel: "Control Panel",
+                english: "English",
+                spanish: "Español (Spanish)",
+                colortoWhite: "Color to White",
+                colortoBlack: "Color to Black",
+                colortoRed: "Color to Red",
+                colortoGreen: "Color to Green",
+                colortoBlue: "Color to Blue",
+                language: "Language",
+                deleteHistory: "Delete color history",
+                deleteData: "Delete Data",
+                historyDelete: "History Deleted",
+                colorCopied: "Color copied",
+                generateColor: "Generate Color",
+                version: "Version",
+                cPallete: "Color Pallete",
+                gPallete: "Generate Colors",
+                copyPallete: "Copy Colors",
+                copiedColors: "Copied Colors",
+                wColorHex: "Write your Hex Color",
+                searchColor: "Color Search",
+            },
+        },
+    },
+});

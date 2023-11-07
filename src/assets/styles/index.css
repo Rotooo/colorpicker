@@ -25,3 +25,23 @@ a {
     background: fff;
   }
 }
+
+::-webkit-scrollbar {
+  width: 9px;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111111;
+}
+ 
+::-webkit-scrollbar-thumb {
+  /*background: linear-gradient(#dfdfdf, #838383);*/
+  background-color: #dfdfdf;
+  background-clip: content-box;
+  border-radius: 5px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(#939393, #757575);
+}
