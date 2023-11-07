@@ -32,16 +32,17 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-  background: #111111;
+  background: #101010;
 }
  
 ::-webkit-scrollbar-thumb {
   /*background: linear-gradient(#dfdfdf, #838383);*/
-  background-color: #dfdfdf;
+  background-color: #3d3d3d;
   background-clip: content-box;
   border-radius: 5px; 
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(#939393, #757575);
+  /*background: linear-gradient(#3d3d3d, #313131);*/
+  background-color: #272727;
 }
