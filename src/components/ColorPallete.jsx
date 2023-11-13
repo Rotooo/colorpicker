@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import ColorPalGen from '../assets/img/muestras.png';
+import CopyIcon from '../assets/img/copy.png';
+import SaveIcon from '../assets/img/save.png';
 import 'react-toastify/dist/ReactToastify.css';
 import '../assets/styles/styles.css';
 
@@ -26,11 +29,29 @@ export default function ColorPallete() {
     return colores;
   }
 
+  function descargarTxt(data, filename) {
+    const blob = new Blob([data], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+function descargarArchivo() {
+    const textt = dcolorPallete.join('\n');
+    const nombreArchivo = 'ColorPallete.txt';
+    descargarTxt(textt, nombreArchivo);
+}
+
   const handleClick = () => {
-    //const colorpallete = genColorHexRandom(5);
     setColorPallete(genColorHexRandom(5));
     setButtonStatus(false);
   };
+
 
   const handleCopyCPallete = async () => {
     await navigator.clipboard.writeText(dcolorPallete);
@@ -46,16 +67,27 @@ export default function ColorPallete() {
   };
 
   return (
-    <div>
-      <button className='buttonw2' onClick={handleClick}>{t('gPallete')}</button>
-      <div className='spacing10' />
-      <button 
-        className='buttonw2' 
-        onClick={handleCopyCPallete}
-        disabled={buttonEnable}
-      >
-        {t('copyPallete')}
-      </button>
+    <>
+      <div className='toolbar'>
+        <div className="tooltip">
+          <span className="tooltiptext">{t('gPallete')}</span>
+            <button className='iconbutton' onClick={handleClick}>
+              <img src={ColorPalGen} alt="New Icon"/>
+            </button>
+        </div>
+        <div className="tooltip">
+          <span className="tooltiptext">{t('copyColors')}</span>
+            <button className='iconbutton' disabled={buttonEnable} onClick={handleCopyCPallete}>
+              <img src={CopyIcon} alt="New Icon"/>
+            </button>
+        </div>
+        <div className="tooltip">
+          <span className="tooltiptext">{t('saveColors')}</span>
+            <button className='iconbutton' onClick={descargarArchivo}>
+              <img src={SaveIcon} alt="New Icon"/>
+            </button>
+        </div>
+      </div>
       <div className='spacing10' />
       {dcolorPallete.map((e) => (
         <div key={e}>
@@ -68,6 +100,6 @@ export default function ColorPallete() {
         />
         </div>
       ))}
-    </div>
+    </>
   )
 }

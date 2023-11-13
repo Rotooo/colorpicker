@@ -308,3 +308,22 @@ option{
 .intcolor:focus{
   outline: none;
 }
+
+.spaceTable{
+  background-color: #383638;
+  border: 2px solid #252525;
+  box-shadow: 0px 3px #131313;
+  border-radius: 5px;
+  width: 100%;
+}
+
+td{
+  border: 2px solid #2b2b2b;
+  padding: 2px;
+}
+
+.toolbar{
+  background-color: #181818;
+  border-radius: 5px;
+  box-shadow: 0px 3px #131313;
+}
