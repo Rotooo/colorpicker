@@ -71,19 +71,6 @@ export default function CustomizedAccordions() {
       </Accordion>
 
       <Accordion 
-        expanded={expanded === 'panel3'} 
-        onChange={handleChange('panel3')}
-        sx={{ bgcolor: '#100F10', color: '#fff' }}
-      >
-        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography><b>🔍 {t('searchColor')}</b></Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <ColorSearch />
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion 
         expanded={expanded === 'panel2'} 
         onChange={handleChange('panel2')}
         sx={{ bgcolor: '#100F10', color: '#fff' }}

@@ -20,6 +20,7 @@ import ColorizeHistory from '../assets/img/addcolorize.png';
 import imageNull from '../assets/img/imagenull.png';
 import SettingsWindow from '../components/Settings';
 import Accordions from '../components/Accordions';
+import SearchColor from '../components/SearchColor';
 import 'react-toastify/dist/ReactToastify.css';
 
 const themeDark = createTheme({
@@ -135,6 +136,11 @@ export default function SignInSide() {
                 <button className='iconbutton' onClick={openEyeDropperHis}>
                   <img src={ColorizeHistory} alt="New Icon"/>
                 </button>
+              </div>
+
+              <div className='tooltip'>
+                <span className='tooltiptext'>{t('searchColor')}</span>
+                <SearchColor />
               </div>
               
               <div className="tooltip">
