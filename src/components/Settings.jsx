@@ -160,7 +160,7 @@ export default function CustomizedDialogs() {
 
           <center>
             <p>{company}</p>
-            <p className='inertext'>{t('version')}: Beta-1.33</p>
+            <p className='inertext'>{t('version')}: Beta-1.34</p>
           </center>
         </DialogContent>
       </BootstrapDialog>

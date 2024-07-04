@@ -21,6 +21,12 @@ import imageNull from '../assets/img/imagenull.png';
 import SettingsWindow from '../components/Settings';
 import Accordions from '../components/Accordions';
 import SearchColor from '../components/SearchColor';
+import WorldIcon from '../assets/img/world.png';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import 'react-toastify/dist/ReactToastify.css';
 
 const themeDark = createTheme({
@@ -32,7 +38,10 @@ const themeDark = createTheme({
 export default function SignInSide() {
     const example = useContext(ColorContext);
     const [image, setImage] = useState(imageNull);
+    const [urlImage, setUrlImage] = useState('');
     const [zoom, setZoom] = useState('cover');
+    const [open, setOpen] = useState(false);
+
     const inputRef = useRef(null);
     const { t } = useTranslation();
 
@@ -56,6 +65,14 @@ export default function SignInSide() {
         example.setColor(sRGBHex);
         SaveDataToLocalStorage(sRGBHex);
     };
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };  
     
     /*Importa una imagen al dashboard*/
     const handleFileInput = (e) => {
@@ -65,6 +82,20 @@ export default function SignInSide() {
         } else {
           setImage(imageNull);
         }
+    };
+
+    const handleChangeURL = (e) => {
+      setUrlImage(e.target.value);
+    };
+
+    const handleSearchImage = () => {
+      if(urlImage){
+        setImage(urlImage);
+        setOpen(false);
+      } else {
+        setImage(urlImage);
+        setOpen(false);
+      }
     };
 
     /*Botones de Zoom para la imagen*/
@@ -123,6 +154,37 @@ export default function SignInSide() {
                   accept='image' 
                   style={{display: 'none'}}
                 />
+
+              <div className="tooltip">
+                <span className="tooltiptext">{t('searchImage')}</span>
+                <button className='iconbutton' onClick={handleClickOpen}>
+                  <img src={WorldIcon} alt="New Icon"/>
+                </button>
+                <Dialog
+                  open={open}
+                  onClose={handleClose}
+                  PaperProps={{
+                    component: 'form',
+                    style: {
+                      backgroundColor: '#101010',
+                      color: '#fff',
+                    },
+                  }}
+                >
+                  <DialogTitle>🌐 {t('searchImage')}</DialogTitle>
+                  <DialogContent sx={{ color: '#fff' }}>
+                    <DialogContentText sx={{ color: '#fff' }}>
+                      Escribe la URL de la imagen que deseas importar:
+                    </DialogContentText>
+                    <div className='spacing10' />
+                    <input type="url" className='colorText' onChange={handleChangeURL} placeholder='URL' />
+                  </DialogContent>
+                  <DialogActions>
+                    <button className='buttonw' onClick={handleClose}>{t('cancel')}</button>
+                    <button className='buttonimport' onClick={handleSearchImage}>{t('import')}</button>
+                  </DialogActions>
+                </Dialog>
+              </div>
 
               <div className="tooltip">
                 <span className="tooltiptext">{t('getColor')}</span>
