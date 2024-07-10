@@ -1,15 +1,26 @@
-import React, {useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useTranslation } from 'react-i18next';
+import { getHistory, deleteHistoy } from '../services/id';
+import { toast } from 'react-toastify';
 import Grid from '@mui/material/Grid';
 import Tooltip from '@mui/material/Tooltip';
+import SaveIcon from '../assets/img/save.png';
+import DeleteIcon from '../assets/img/delete.png';
 import '../assets/styles/styles.css';
 
 export default function ColorH() {
+  const [names, setNames] = useState([]);
   const { t } = useTranslation();
-  var a = [];
-  let objColor = JSON.parse(localStorage.getItem("colorHistory"))|| ["#ffffff"];
-  a = JSON.parse(localStorage.getItem('colorHistory')) || [];
-  const miArray = JSON.parse(localStorage.getItem('colorHistory'));
+
+  useEffect(() => {
+    const fetchNames = async () => {
+        const namesFromDB = await getHistory();
+        setNames(namesFromDB);
+    };
+
+    fetchNames();
+});
+
 
   function descargarTxt(data, filename) {
     const blob = new Blob([data], { type: 'text/plain' });
@@ -21,23 +32,52 @@ export default function ColorH() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-}
+  }
 
-function descargarArchivo() {
-    const texto = miArray.join('\n');
-    const nombreArchivo = 'historial.txt';
-    descargarTxt(texto, nombreArchivo);
-}
+  function descargarArchivo() {
+      const texto = names.map((e) => e.color);
+      const nombreArchivo = 'historial.txt';
+      descargarTxt(texto, nombreArchivo);
+  }
+
+const handleClearHistory = async () => {
+  toast.success(`${t('historyDelete')}`, {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+  await deleteHistoy();
+  const historyC = await getHistory();
+  setNames(historyC);
+};
 
   return (
     <>
         <Grid container>
-        <button className='buttonw2' onClick={descargarArchivo}>{t('saveHistory')}</button>
-        {objColor.map((e) => (
-          <Tooltip title={`${e}`} key={e}>
+        <div className='toolbar'>
+          <div className="tooltip">
+            <span className="tooltiptext">{t('saveHistory')}</span>
+              <button className='iconbutton' onClick={descargarArchivo}>
+                <img src={SaveIcon} alt="New Icon"/>
+              </button>
+          </div>
+          <div className="tooltip">
+            <span className="tooltiptext">{t('deleteHistory')}</span>
+              <button className='iconbutton' onClick={handleClearHistory}>
+                <img src={DeleteIcon} alt="New Icon"/>
+              </button>
+          </div>
+        </div>
+        <div className='spacing10' />
+        {names.map((e) => (
+          <Tooltip title={`${e.color}`} key={e.id}>
             <div 
               className="colorbutton" 
-              style={{ backgroundColor: `${e}` }} 
+              style={{ backgroundColor: `${e.color}` }} 
             />
           </Tooltip>
         ))}

@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import ColorPalGen from '../assets/img/muestras.png';
 import CopyIcon from '../assets/img/copy.png';
 import SaveIcon from '../assets/img/save.png';
+//import NewColors from '../containers/NewColors';
 import 'react-toastify/dist/ReactToastify.css';
 import '../assets/styles/styles.css';
 
@@ -69,6 +70,7 @@ function descargarArchivo() {
   return (
     <>
       <div className='toolbar'>
+      {/*<NewColors />*/}
         <div className="tooltip">
           <span className="tooltiptext">{t('gPallete')}</span>
             <button className='iconbutton' onClick={handleClick}>

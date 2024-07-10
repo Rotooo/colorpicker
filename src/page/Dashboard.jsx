@@ -28,6 +28,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import 'react-toastify/dist/ReactToastify.css';
+import { addColor, getHistory } from '../services/id';
 
 const themeDark = createTheme({
     status: {
@@ -41,16 +42,16 @@ export default function SignInSide() {
     const [urlImage, setUrlImage] = useState('');
     const [zoom, setZoom] = useState('cover');
     const [open, setOpen] = useState(false);
+    const [names, setNames] = useState([]);
 
     const inputRef = useRef(null);
     const { t } = useTranslation();
 
-    function SaveDataToLocalStorage(data){
-      var a = [];
-      a = JSON.parse(localStorage.getItem('colorHistory')) || [];
-      a.push(data);
-      localStorage.setItem('colorHistory', JSON.stringify(a));
-    }
+    const handleAddName = async (name) => {
+      await addColor(name);
+      const namesFromDB = await getHistory();
+      setNames(namesFromDB);
+    };
 
     /*Este sirve para activar el cursor*/
     const openEyeDropper = async () => {
@@ -63,7 +64,7 @@ export default function SignInSide() {
       let eyeDropper = new EyeDropper();
         const { sRGBHex } = await eyeDropper.open();
         example.setColor(sRGBHex);
-        SaveDataToLocalStorage(sRGBHex);
+        handleAddName(sRGBHex);
     };
 
     const handleClickOpen = () => {
@@ -86,15 +87,14 @@ export default function SignInSide() {
 
     const handleChangeURL = (e) => {
       setUrlImage(e.target.value);
+      console.log(e.target.value);
     };
 
     const handleSearchImage = () => {
       if(urlImage){
         setImage(urlImage);
-        setOpen(false);
       } else {
         setImage(urlImage);
-        setOpen(false);
       }
     };
 
@@ -125,6 +125,16 @@ export default function SignInSide() {
             backgroundRepeat: 'no-repeat',
             backgroundSize: `${zoom}`,
             backgroundPosition: 'center',
+            filter: `
+            contrast(${example.contrastValue}%) 
+            brightness(${example.brightness}%)
+            grayscale(${example.grayscale}%)
+            invert(${example.invert}%)
+            opacity(${example.opacity}%)
+            hue-rotate(${example.hue}deg)
+            sepia(${example.sepia}%)
+            saturate(${example.saturate}%)
+            `,
           }}
         />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} sx={{ bgcolor: '#161416' }} square>
@@ -165,6 +175,10 @@ export default function SignInSide() {
                   onClose={handleClose}
                   PaperProps={{
                     component: 'form',
+                    onSubmit: (event) => {
+                      event.preventDefault();
+                      handleClose();
+                    },
                     style: {
                       backgroundColor: '#101010',
                       color: '#fff',
@@ -174,10 +188,15 @@ export default function SignInSide() {
                   <DialogTitle>🌐 {t('searchImage')}</DialogTitle>
                   <DialogContent sx={{ color: '#fff' }}>
                     <DialogContentText sx={{ color: '#fff' }}>
-                      Escribe la URL de la imagen que deseas importar:
+                      {t('urlText')}
                     </DialogContentText>
                     <div className='spacing10' />
-                    <input type="url" className='colorText' onChange={handleChangeURL} placeholder='URL' />
+                    <input 
+                      type="text" 
+                      placeholder='URL' 
+                      className='textboxUrl' 
+                      onChange={handleChangeURL} 
+                    />
                   </DialogContent>
                   <DialogActions>
                     <button className='buttonw' onClick={handleClose}>{t('cancel')}</button>

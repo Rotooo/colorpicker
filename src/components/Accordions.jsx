@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import ColorControl from './ColorControl';
 import { useTranslation } from 'react-i18next';
 import ColorPallete from './ColorPallete';
-import ColorSearch from '../containers/Accordions/ColorSearch';
+import Filtros from '../components/Filtros';
 import ColorH from './ColorH';
 
 const Accordion = styled((props) => (
@@ -73,6 +73,19 @@ export default function CustomizedAccordions() {
       <Accordion 
         expanded={expanded === 'panel2'} 
         onChange={handleChange('panel2')}
+        sx={{ bgcolor: '#100F10', color: '#fff' }}
+      >
+        <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
+          <Typography><b>🪄 {t('filters')}</b></Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Filtros />
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion 
+        expanded={expanded === 'panel3'} 
+        onChange={handleChange('panel3')}
         sx={{ bgcolor: '#100F10', color: '#fff' }}
       >
         <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">

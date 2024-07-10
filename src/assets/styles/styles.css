@@ -23,6 +23,18 @@
     padding: 5px;
 }
 
+.textboxUrl{
+  background-color: #1D1B1D;
+  color: #DCDBDC;
+  height: 35px;
+  border: none;
+  border-radius: 3px;
+  width: 100%;
+  padding: 5px;
+}
+
+.textboxUrl:focus{ outline: solid #2a2727; }
+
 .colorText:focus{
   outline: solid #2a2727;
 }
@@ -189,7 +201,8 @@
   box-shadow: 0px 1px #131313;
   font-size: 15px;
   font-weight: bold;
-  color: #fff;
+  cursor: pointer;
+  color: #151e23;
   border-radius: 5px;
   padding: 7px;
 }
@@ -337,4 +350,21 @@ td{
   background-color: #181818;
   border-radius: 5px;
   box-shadow: 0px 3px #131313;
+  width: 100%;
+  height: auto;
+}
+
+.colorquad{
+  margin-top: 110px;
+}
+
+.titleName{
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.innerT{
+  padding: 10px;
 }

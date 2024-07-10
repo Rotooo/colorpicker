@@ -8,7 +8,6 @@ import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import SettingIcon from '../assets/img/settings.png';
-import { toast } from 'react-toastify';
 import '../assets/styles/styles.css';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -88,21 +87,6 @@ export default function CustomizedDialogs() {
     console.clear();
   };
 
-  const handleClearData = () => {
-    localStorage.clear();
-    toast.success(`${t('historyDelete')}`, {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-    localStorage.setItem("colorHistory", '["#ffffff"]');
-    localStorage.setItem("i18nextLng", 'en');
-};
-
   return (
     <div>
         <button className='iconbutton' onClick={handleClickOpen}>
@@ -112,15 +96,22 @@ export default function CustomizedDialogs() {
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
+        PaperProps={{
+          style: {
+            backgroundColor: '#101010',
+            color: '#fff',
+            boxShadow: 'none',
+            width: '50%',
+          },
+        }}
       >
         <BootstrapDialogTitle 
           id="customized-dialog-title" 
           onClose={handleClose}
-          sx={{ bgcolor: '#100F10', color: '#fff' }}
         >
-          {t('settings')}
+          ⚙️ {t('settings')}
         </BootstrapDialogTitle>
-        <DialogContent dividers sx={{ bgcolor: '#1D1B1D', color: '#fff' }}>
+        <DialogContent>
           <label>{t('language')}: </label>
           <select 
             name="select" 
@@ -131,11 +122,6 @@ export default function CustomizedDialogs() {
             <option value="en">{t('english')}</option>
             <option value="es">{t('spanish')}</option>
           </select>
-          <div className='spacing10' />
-          <label>{t('deleteHistory')}: </label>
-          <button className='buttonclear' onClick={handleClearData}>
-            {t('deleteData')}
-          </button>
           <div className='spacing10' />
           <table className='spaceTable'>
             <thead>
@@ -160,7 +146,7 @@ export default function CustomizedDialogs() {
 
           <center>
             <p>{company}</p>
-            <p className='inertext'>{t('version')}: Beta-1.34</p>
+            <p className='inertext'>{t('version')}: 2.02</p>
           </center>
         </DialogContent>
       </BootstrapDialog>
