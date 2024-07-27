@@ -117,7 +117,6 @@
 .tooltip {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black;
   }
   
   .tooltip .tooltiptext {
@@ -185,7 +184,7 @@
 }
 
 .buttonw{
-  background-color: #383638;
+  background-color: #212121;
   border: 1px outset #383638;
   box-shadow: 0px 1px #131313;
   font-size: 15px;
@@ -209,12 +208,24 @@
 
 .buttonw:hover{
   cursor: pointer;
-  background-color: #434043;
+  background-color: #2b2b2b;
+}
+
+.buttonDelete{
+  background-color: #eb0d3f;
+  border: 1px outset #383638;
+  box-shadow: 0px 1px #131313;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 5px;
+  padding: 7px;
 }
 
 .buttonw2{
   width: 100%;
-  background-color: #383638;
+  background-color: #212121;
   border: 1px outset #383638;
   box-shadow: 0px 1px #131313;
   font-size: 15px;
@@ -226,7 +237,7 @@
 
 .buttonw2:hover{
   cursor: pointer;
-  background-color: #434043;
+  background-color: #2b2b2b;
 }
 
 .buttonclear{
@@ -368,3 +379,97 @@ td{
 .innerT{
   padding: 10px;
 }
+
+.iconaccordion{
+  display: inline;
+  align-items: baseline;
+}
+
+.iconaccordion img {
+  width: 17px;
+}
+
+.colorinput{
+  border: none;
+  background: none;
+  text-decoration: none;
+  width: 100%;
+  height: 100px;
+}
+
+.colorinput::-webkit-color-swatch{
+  border-radius: 5px;
+  border: none;
+}
+
+.colorPText{
+    background-color: #1D1B1D;
+    color: #DCDBDC;
+    height: 35px;
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.colorPText:focus{
+  outline: solid #2a2727;
+}
+
+.colorPText2{
+  background-color: #1D1B1D;
+  color: #DCDBDC;
+  height: 35px;
+  border: none;
+  border-radius: 3px;
+  padding: 5px;
+  margin: 0px 5px;
+  width: 100%;
+}
+
+.colorPText2:focus{
+  outline: solid #2a2727;
+}
+
+.registerColor{
+  background-color: #212121;
+  border-radius: 10px;
+  height: auto;
+  margin: 10px;
+  padding: 7px;
+  display: flex;
+  width: 93%;
+  align-items: center;
+}
+
+.scrolldiv {
+  width: 100%;
+  height: 450px;
+  overflow: auto;
+}
+
+.scrolldivP{
+  width: auto;
+  height: 450px;
+  overflow: auto;
+}
+
+.divcolor{
+  width: 35px;
+  height: 35px;
+  margin: 0px 1px;
+  cursor: pointer;
+  border: 2px solid #101010;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+.divcolor:hover{ border: 2px solid #1d1d1d; }
+
+.divoptions{
+  width: 36%;
+  text-align: right;
+  display: inline;
+  align-items: baseline;
+  padding: 7px 0px;
+}
+
+.acorTitle{ width: 60%; }

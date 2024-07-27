@@ -7,8 +7,8 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ColorControl from './ColorControl';
 import { useTranslation } from 'react-i18next';
-import ColorPallete from './ColorPallete';
 import Filtros from '../components/Filtros';
+import Palletes from '../containers/ColorPalletes/Tabs';
 import ColorH from './ColorH';
 
 const Accordion = styled((props) => (
@@ -63,7 +63,9 @@ export default function CustomizedAccordions() {
         sx={{ bgcolor: '#100F10', color: '#fff' }}
       >
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography><b>🎛️ {t('controlpanel')}</b></Typography>
+          <Typography>
+            <b>🎛️ {t('controlpanel')}</b>
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <ColorControl />
@@ -92,7 +94,7 @@ export default function CustomizedAccordions() {
           <Typography><b>🎨 {t('cPallete')}</b></Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <ColorPallete />
+          <Palletes />
         </AccordionDetails>
       </Accordion>
 

@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import SearchIcon  from '../assets/img/search.png';
 import { styled } from '@mui/material/styles';
+import { ColorContext } from '../context/Color';
+import { addColor } from '../services/id';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,6 +26,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 export default function CustomizedDialogs() {
   const [open, setOpen] = useState(false);
   const [scolor, setSColor] = useState('');
+  const example = useContext(ColorContext);
   const { t } = useTranslation();
 
   const handleColorChange = (e) => {
@@ -34,21 +38,43 @@ export default function CustomizedDialogs() {
     }
   };
 
-  const handleCopyColor = async () => {
-    await navigator.clipboard.writeText(scolor);
-    toast(`${t('colorCopied')}: ${scolor}`, {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+  const handleUseColor = () => {
+    if (scolor === null || scolor === ''){
+      toast.error(`No se encontro un color`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      example.setColor(scolor);
+      setOpen(false);
+    }
+  };
+
+  const handleSaveColor = () => {
+    if (scolor === null || scolor === ''){
+      toast.error(`No se encontro un color`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      addColor(scolor);
+      setOpen(false);
+    }
   };
 
   const handleClickOpen = () => {
     setOpen(true);
+    setSColor('');
   };
   const handleClose = () => {
     setOpen(false);
@@ -92,23 +118,32 @@ export default function CustomizedDialogs() {
         <DialogContent dividers>
           <input 
             type="text"
-            className='colorText' 
+            className='colorText'
             onChange={handleColorChange} 
             placeholder={`${t('wColorHex')}`}
           />
-          <div className='spacing10' />
-          <div
-              id="FilColor" 
-              style={{ 
-                background: `${scolor}`, 
-                borderRadius: 10,
-                width: '100%', 
-                height: 100,
-                border: '2px solid rgba(50, 50, 50, 0.5)', 
-              }}
-              onClick={handleCopyColor} 
+          <div className='spacing5' />
+          <input type='color' 
+            className='colorinput'
+            value={scolor}
+            onChange={(e) => setSColor(e.target.value)}
           />
+          <p>❕<i>{t('message1')}</i></p>
         </DialogContent>
+        <DialogActions>
+          <button 
+            className='buttonw' 
+            onClick={handleUseColor}
+          >
+            {t('useColor')}
+          </button>
+          <button 
+            className='buttonw'
+            onClick={handleSaveColor}
+          >
+            {t('saveHistory')}
+          </button>
+        </DialogActions>
       </BootstrapDialog>
     </React.Fragment>
   );
